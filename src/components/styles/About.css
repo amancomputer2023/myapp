@@ -16,7 +16,7 @@
 }
 
 .about-hero {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('http://localhost:3001/images/About.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://backend-1-cek6.onrender.com/images/About.jpg');
   object-fit: cover;
   background-size: cover; 
   background-position: center;

@@ -16,7 +16,7 @@ import { AlertCircle } from "lucide-react";
 
 async function signIn(email, password) {
   try {
-    const response = await fetch("http://localhost:3001/api/login", {
+    const response = await fetch("https://backend-1-cek6.onrender.com/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -18,7 +18,7 @@ async function insert(formData, image) {
     var dataimage = new FormData();
     dataimage.append("image", image);
     try {
-      const response = await fetch("http://localhost:3001/api/upload", {
+      const response = await fetch("https://backend-1-cek6.onrender.com/api/upload", {
         method: "POST",
         headers: {
           "api-key":"Gajraj@0905"
@@ -30,11 +30,11 @@ async function insert(formData, image) {
       console.log(dataFile);
       
       alert(`Image uploaded: ${dataFile.filename}`);
-      formData.image = `http://localhost:3001/images/${dataFile.filename}`;
+      formData.image = `https://backend-1-cek6.onrender.com/images/${dataFile.filename}`;
     } catch (error) {
       console.error("Upload error:", error);
     }
-    const response = await fetch("http://localhost:3001/api/product", {
+    const response = await fetch("https://backend-1-cek6.onrender.com/api/product", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

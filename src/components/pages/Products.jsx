@@ -18,7 +18,7 @@ function Products() {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3001/api/product/?api-key=Gajraj@0905"
+        "https://backend-1-cek6.onrender.com/api/product/?api-key=Gajraj@0905"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch products");

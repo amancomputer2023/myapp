@@ -27,7 +27,7 @@ function Header(props) {
       <div className="header-container">
         <div id="titleimage">
           <img
-            src="http://localhost:3001/images/logo.jpg"
+            src="https://backend-1-cek6.onrender.com/images/logo.jpg"
             alt="logo"
             id="logo-img"
           />

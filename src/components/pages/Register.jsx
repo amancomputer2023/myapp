@@ -17,7 +17,7 @@ import { AlertCircle } from "lucide-react";
 async function signUp(formData) {
   
   try {
-    const response = await fetch("http://localhost:3001/api/register", {
+    const response = await fetch("https://backend-1-cek6.onrender.com/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

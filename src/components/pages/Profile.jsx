@@ -44,7 +44,7 @@ export default function ProfileForm(props) {
           <div className="flex items-center space-x-4">
             <Avatar className="h-20 w-20">
               <AvatarImage
-                src={"http://localhost:3001/images/gajju"}
+                src={"https://backend-1-cek6.onrender.com/images/gajju"}
                 alt={props.user.username}
               />
               <AvatarFallback>

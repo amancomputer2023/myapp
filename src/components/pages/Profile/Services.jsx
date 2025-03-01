@@ -14,7 +14,7 @@ import { CirclePlus } from "lucide-react";
 
 async function insert(formData) {
   try {
-    const response = await fetch("http://localhost:3001/api/services", {
+    const response = await fetch("https://backend-1-cek6.onrender.com/api/services", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

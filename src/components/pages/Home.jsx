@@ -17,7 +17,7 @@ const Home = () => {
     const fetchDestinations = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/featured/?api-key=Gajraj@0905"
+          "https://backend-1-cek6.onrender.com/api/featured/?api-key=Gajraj@0905"
         );
         setDestinations(response.data);
         setLoading(false);

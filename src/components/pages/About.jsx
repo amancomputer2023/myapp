@@ -138,19 +138,19 @@ const About = () => {
               {
                 name: "Aman Kumar Jhariya",
                 role: "Founder & CEO",
-                image: "http://localhost:3001/images/About",
+                image: "https://backend-1-cek6.onrender.com/images/About",
                 disc: "Leading with a vision to simplify and enhance technology for everyone.",
               },
               {
                 name: "Michael Chen",
                 role: "Head of IT & Services",
-                image: "http://localhost:3001/images/About",
+                image: "https://backend-1-cek6.onrender.com/images/About",
                 disc: " Ensuring seamless computer repairs, upgrades, and custom tech solutions.",
               },
               {
                 name: "Null",
                 role: "Customer Experience Manager",
-                image: "http://localhost:3001/images/About",
+                image: "https://backend-1-cek6.onrender.com/images/About",
                 disc: "Providing dedicated support to keep your tech running smoothly.",
               },
             ].map((member, index) => (

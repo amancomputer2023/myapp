@@ -22,7 +22,7 @@ const ICON_MAP = {
 
 async function getServices() {
   try {
-    const response = await fetch("http://localhost:3001/api/services", {
+    const response = await fetch("https://backend-1-cek6.onrender.com/api/services", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
