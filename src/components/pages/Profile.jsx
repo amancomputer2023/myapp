@@ -74,7 +74,7 @@ export default function ProfileForm(props) {
             </div>
           </div>
         </CardHeader>
-        {props.user.role = "admin" ? <Admin /> : <Users />}
+        {(props.user.role) === ("admin") ? (<Admin />) : (<Users />)}
         <CardFooter className="flex justify-center">
           <Button
             variant="outline"
