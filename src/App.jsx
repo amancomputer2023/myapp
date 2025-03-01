@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   Route,
   Routes,
   useLocation,
@@ -14,9 +14,9 @@ import LoginPage from "./components/pages/LoginPage";
 import LogoutPage from "./components/pages/LogoutPage";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/Profile";
+import Footer from "./components/Footer";
 
 import "./App.css";
-import Footer from "./components/Footer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,12 +27,19 @@ function App() {
       setUser(JSON.parse(storedUser));
     }
   }, []);
-  
-  const location = useLocation();
-  
+
   return (
-    <BrowserRouter>
-       <div className="App">
+    <Router>
+      <MainApp user={user} setUser={setUser} />
+    </Router>
+  );
+}
+
+function MainApp({ user, setUser }) {
+  const location = useLocation();
+
+  return (
+    <div className="App">
       <Header user={user} />
       <main>
         <Routes location={location}>
@@ -48,7 +55,6 @@ function App() {
       </main>
       <Footer />
     </div>
-    </BrowserRouter>
   );
 }
 
