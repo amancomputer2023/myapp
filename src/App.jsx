@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Routes,
   useLocation,
@@ -19,14 +19,6 @@ import "./App.css";
 import Footer from "./components/Footer";
 
 function App() {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
-  );
-}
-
-function AppContent() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -37,9 +29,10 @@ function AppContent() {
   }, []);
   
   const location = useLocation();
-
+  
   return (
-    <div className="App">
+    <BrowserRouter>
+       <div className="App">
       <Header user={user} />
       <main>
         <Routes location={location}>
@@ -55,6 +48,7 @@ function AppContent() {
       </main>
       <Footer />
     </div>
+    </BrowserRouter>
   );
 }
 
