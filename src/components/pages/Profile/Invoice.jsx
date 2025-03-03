@@ -155,7 +155,7 @@ const Invoice = () => {
               <p className="font-semibold">
                 Sign By: <br /> Aman Kumar Jhariya
               </p>
-              <img src="signature.png" alt="Signature" className="h-12 mt-2" />
+              <img src="https://backend-1-cek6.onrender.com/images/image-1741014838126.jpg"  alt="Signature" className="h-12 mt-2 mix-blend-darken" />
             </div>
             <div className="text-left">
               <p className="font-semibold">Account Details:</p>
