@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-export default function HomeCta(props) {
+export default function HomeCta() {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <section className="home-cta">
         <div className="container">
@@ -24,12 +25,12 @@ export default function HomeCta(props) {
             <Link
               to="/contact"
               className="btn btn-primary"
-              onMouseEnter={() => props.setIsHovered(true)}
-              onMouseLeave={() => props.setIsHovered(false)}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
               🛠 Get Started Today!
               <ArrowRight
-                className={`cta-icon ${props.isHovered ? "icon-hovered" : ""}`}
+                className={`cta-icon ${isHovered ? "icon-hovered" : ""}`}
               />
             </Link>
           </motion.div>

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { UserDropDown } from "./pages/header/User";
-import _interop_require_default from "@babel/runtime/helpers/interopRequireDefault";
 import "./styles/Header.css";
-import { picture } from "framer-motion/client";
+import logo from "../images/logo.jpg";
+
 
 function Header(props) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,7 +27,7 @@ function Header(props) {
       <div className="header-container">
         <div id="titleimage">
           <img
-            src="https://backend-1-cek6.onrender.com/images/logo.jpg"
+            src={logo}
             alt="logo"
             id="logo-img"
           />
