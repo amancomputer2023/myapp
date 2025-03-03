@@ -1,4 +1,5 @@
 .footer {
+  position: sticky;
   background-color: #100d0d;
   color: rgb(209, 205, 205);
   padding: 1rem 0 .05rem;

@@ -15,18 +15,13 @@ import LogoutPage from "./components/pages/LogoutPage";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/Profile";
 import Footer from "./components/Footer";
-
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
   return (
     <Router>
@@ -37,6 +32,8 @@ function App() {
 
 function MainApp({ user, setUser }) {
   const location = useLocation();
+
+  useEffect(() => {}, [user]);
 
   return (
     <div className="App">

@@ -18,8 +18,8 @@ function UserDropDown(user) {
   user = user.user;
   if (user == null) {
     return (
-      <DropdownMenu open={open} onOpenChange={setOpen}>
-        <DropdownMenuTrigger asChild>
+      <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
+        <DropdownMenuTrigger asChild modal={false}>
           <button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
               <User />
@@ -30,7 +30,7 @@ function UserDropDown(user) {
           className="w-56"
           align="end"
           forceMount
-          style={styleDMC}
+          style={styleDMC} modal={false}
         >
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
@@ -55,11 +55,11 @@ function UserDropDown(user) {
   const initials = user.firstName[0] + user.lastName[0];
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
+    <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
       <DropdownMenuTrigger asChild>
         <button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user.image} alt={user.firstName + " " + user.lastName} />
+            <AvatarImage src={user.profilePictureUrl} alt={user.firstName + " " + user.lastName} />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
         </button>
