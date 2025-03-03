@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import "../../styles/invoice.css";
 
@@ -13,6 +13,8 @@ const Invoice = () => {
   const [items, setItems] = useState([
     { sno: 1, item: "item name", qty: 0, rate: 0, amount: 0 }
   ]);
+
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const today = new Date();
 
@@ -48,6 +50,11 @@ const Invoice = () => {
   const updateBillNumber = (e) => {
     setBillNumber(e.target.value);
   };
+
+  useEffect(() => {
+    const newTotal = items.reduce((sum, item) => sum + item.amount, 0);
+    setTotalAmount(newTotal);
+  }, [items]);
 
   return (
     <div>
@@ -146,7 +153,7 @@ const Invoice = () => {
 
           {/* Total Section */}
           <div className="mt-6 text-right">
-            <p className="text-lg font-bold mr-4">Total Amount: ₹20,000</p>
+            <p className="text-lg font-bold mr-4">Total Amount: {totalAmount}</p>
           </div>
 
           {/* Footer */}
