@@ -1,14 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import './styles/Footer.css';
 
 export default function Footer() {
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle newsletter signup logic here
-    console.log('Newsletter signup submitted');
-  }
+  
+    if (!email.trim()) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+  
+    try {
+      const response = await fetch("https://backend-1-cek6.onrender.com/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key" : "Gajraj@0905",
+        },
+        body: JSON.stringify({ email }),
+      });
+      console.log(response);
+      
+      if (response.ok) {
+        alert("Thank you for subscribing!");
+        setEmail(""); // Clear the input field
+      } else {
+        alert("Subscription failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting email:", error);
+      alert("An error occurred. Please try again later.");
+    }
+  };
+  
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -32,6 +60,8 @@ export default function Footer() {
               type="email"
               placeholder="Enter your email"
               className="newsletter-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <button type="submit" className="newsletter-button">Subscribe</button>
@@ -40,7 +70,7 @@ export default function Footer() {
         <div className="footer-section">
           <h3 className="footer-title">Follow Us</h3>
           <div className="social-links">
-            <a href="https://www.facebook.com/profile.php?id=61573859632266" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Facebook">
+          <a href="https://www.facebook.com/profile.php?id=61573859632266" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Facebook" title="Facebook">
               <Facebook size={24} />
             </a>
             <a href="https://twitter.com/gajraj_chak_12" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Twitter">

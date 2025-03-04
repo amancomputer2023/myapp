@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { ChevronLeft, FileText, Package, UserCircle, Wrench } from "lucide-react";
+import { ChevronRight, FileText, Package, UserCircle, Wrench } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -71,7 +71,7 @@ export default function Profile({ user }) {
                 size="icon"
                 className="shrink-0 lg:hidden"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronRight  className="w-8 h-8 text-gray-700 hover:text-blue-500 transition-all"/>
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
