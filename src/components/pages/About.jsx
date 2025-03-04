@@ -38,18 +38,12 @@ const About = () => {
         <motion.div className="about-content-block" {...fadeIn}>
           <h2>Our Story</h2>
           <p>
-            Founded in 2010, Travel Friend has been helping adventurers discover
-            the wonders of our world for over a decade. What started as a small
-            local travel agency has grown into a global network of passionate
-            travel experts, serving wanderlust-filled souls from all walks of
-            life.
-          </p>
-          <p>
-            Our journey has been built on a foundation of curiosity, respect for
-            diverse cultures, and a deep love for the planet we call home. As
-            we've grown, we've never lost sight of our mission: to create
-            unforgettable experiences that broaden horizons and bring people
-            together.
+            Aman Computer Sells & Services started with a simple goal—providing
+            reliable tech solutions. Over the years, we’ve grown into a trusted
+            name for computers, accessories, and CCTV sales & installation. With
+            a focus on quality service and customer satisfaction, we help
+            individuals and businesses stay secure and connected in the digital
+            world.
           </p>
         </motion.div>
 
@@ -60,35 +54,35 @@ const About = () => {
             innovation. With a passion for cutting-edge technology,
           </p>
           <div className="about-values-grid">
-          {[
-            {
-              title: "Top-Quality Computers & Accessories",
-              icon: Package,
-              description: "Handpicked for performance and reliability",
-            },
-            {
-              title: "Expert Repairs & Maintenance",
-              icon: Wrench,
-              description: "Fast, efficient, and handled by professionals.",
-            },
-            {
-              title: "Custom Solutions",
-              icon: Settings,
-              description: "Tailored to your personal and business needs.",
-            },
-          ].map((value, index) => (
-            <motion.div
-              key={index}
-              className="about-value-card"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <value.icon className="about-value-icon" />
-              <h3>{value.title}</h3>
-              <p>{value.description}</p>
-            </motion.div>
-          ))}
+            {[
+              {
+                title: "Top-Quality Computers & Accessories",
+                icon: Package,
+                description: "Handpicked for performance and reliability",
+              },
+              {
+                title: "Expert Repairs & Maintenance",
+                icon: Wrench,
+                description: "Fast, efficient, and handled by professionals.",
+              },
+              {
+                title: "Custom Solutions",
+                icon: Settings,
+                description: "Tailored to your personal and business needs.",
+              },
+            ].map((value, index) => (
+              <motion.div
+                key={index}
+                className="about-value-card"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <value.icon className="about-value-icon" />
+                <h3>{value.title}</h3>
+                <p>{value.description}</p>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
@@ -127,12 +121,16 @@ const About = () => {
           </div>
         </motion.div>
 
-        <motion.div className="about-team-block" >
+        <motion.div className="about-team-block">
           <h2>Our Team</h2>
+          <p>Tech Experts Dedicated to Powering Your Digital World.</p>
           <p>
-          Tech Experts Dedicated to Powering Your Digital World.
+            Behind every successful tech solution is a team of passionate
+            professionals. At [New Business Name], we combine expertise,
+            innovation, and customer-focused service to ensure your devices
+            perform at their best. From cutting-edge sales to expert repairs,
+            our team is committed to providing top-notch technology solutions.
           </p>
-          <p>Behind every successful tech solution is a team of passionate professionals. At [New Business Name], we combine expertise, innovation, and customer-focused service to ensure your devices perform at their best. From cutting-edge sales to expert repairs, our team is committed to providing top-notch technology solutions.</p>
           <div className="about-team-grid">
             {[
               {
@@ -175,10 +173,14 @@ const About = () => {
         <motion.div className="about-cta-block" {...fadeIn}>
           <h2>Ready to Elevate Your Tech Experience?</h2>
           <p>
-          At Aman Computer Sells & Services, we don’t just sell computers—we provide cutting-edge solutions to keep you connected, productive, and ahead of the curve. Whether you need the latest tech gadgets, expert repairs, or custom IT solutions, we’re here to ensure your technology works seamlessly.
+            At Aman Computer Sells & Services, we don’t just sell computers—we
+            provide cutting-edge solutions to keep you connected, productive,
+            and ahead of the curve. Whether you need the latest tech gadgets,
+            expert repairs, or custom IT solutions, we’re here to ensure your
+            technology works seamlessly.
           </p>
           <a href="/contact" className="about-cta-button">
-          Join us in shaping the future—one device at a time!
+            Join us in shaping the future—one device at a time!
           </a>
         </motion.div>
       </section>
