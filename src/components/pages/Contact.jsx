@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    contact: "",
     message: "",
   });
   const [successMessage, setSuccessMessage] = useState("");
@@ -20,15 +20,33 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSuccessMessage(
-      "Message Sent! We'll get back to you as soon as possible."
-    );
-    setFormData({ name: "", email: "", message: "" });
-    setTimeout(() => setSuccessMessage(""), 5000);
+  
+    try {
+      const response = await fetch("https://backend-1-cek6.onrender.com/api/message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": "Gajraj@0905",
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log(response);
+      
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+      setSuccessMessage("Message Sent! We'll get back to you as soon as possible.");
+      setFormData({ name: "", contact: "", message: "" });
+  
+      setTimeout(() => setSuccessMessage(""), 5000);
+    } catch (error) {
+      console.error("Error:", error);
+      setSuccessMessage("Failed to send message. Please try again.");
+    }
   };
+  
 
   return (
     <div className="contact-page">
@@ -54,12 +72,12 @@ const Contact = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="contact">contact</label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  type="contact"
+                  id="contact"
+                  name="contact"
+                  value={formData.contact}
                   onChange={handleChange}
                   required
                 />
