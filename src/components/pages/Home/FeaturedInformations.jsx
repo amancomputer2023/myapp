@@ -8,8 +8,6 @@ export default function HomeFeaturedInformations() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [autoSlide, setAutoSlide] = useState(true);
-  const slideInterval = 5000; // Auto-slide every 5s
 
   const fetchDestinations = async () => {
     setLoading(true);
@@ -17,7 +15,7 @@ export default function HomeFeaturedInformations() {
 
     try {
       const { data, status } = await axios.get(
-        "https://backend-1-cek6.onrender.com/api/featured/?api-key=Gajraj@0905"
+        `https://backend-1-cek6.onrender.com/api/featured/?api-key=Gajraj@0905`
       );
 
       if (status === 200 && Array.isArray(data) && data.length > 0) {
@@ -36,32 +34,29 @@ export default function HomeFeaturedInformations() {
     fetchDestinations();
   }, []);
 
-  // Auto-slide effect
-  useEffect(() => {
-    if (autoSlide && destinations.length > 1) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % destinations.length);
-      }, slideInterval);
-      return () => clearInterval(interval);
-    }
-  }, [autoSlide, destinations]);
-
   const handleNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % destinations.length);
-    setAutoSlide(false);
-  }, [destinations]);
+    if (destinations.length > 0) {
+      setCurrentIndex((prev) => (prev + 1) % destinations.length);
+    }
+  }, [destinations.length]);
 
   const handlePrev = useCallback(() => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + destinations.length) % destinations.length
-    );
-    setAutoSlide(false);
-  }, [destinations]);
+    if (destinations.length > 0) {
+      setCurrentIndex(
+        (prev) => (prev - 1 + destinations.length) % destinations.length
+      );
+    }
+  }, [destinations.length]);
 
-  const handleKeyDown = (e) => {
-    if (e.key === "ArrowRight") handleNext();
-    if (e.key === "ArrowLeft") handlePrev();
-  };
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleNext, handlePrev]);
 
   if (loading) {
     return (
@@ -100,6 +95,16 @@ export default function HomeFeaturedInformations() {
     );
   }
 
+  if (destinations.length === 0) {
+    return (
+      <section className="home-featured-destinations">
+        <div className="container">
+          <h2>No featured destinations available.</h2>
+        </div>
+      </section>
+    );
+  }
+
   const visibleDestinations = [
     destinations[(currentIndex - 1 + destinations.length) % destinations.length],
     destinations[currentIndex],
@@ -107,11 +112,7 @@ export default function HomeFeaturedInformations() {
   ];
 
   return (
-    <section
-      className="home-featured-destinations"
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-    >
+    <section className="home-featured-destinations">
       <div className="container">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -130,23 +131,26 @@ export default function HomeFeaturedInformations() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {visibleDestinations.map(({ name, highlights, image }, index) => (
-              <motion.div
-                key={name}
-                className="destination-card"
-                initial={{ opacity: 0, x: index === 1 ? 20 : -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4 }}
-              >
-                {image ? (
-                  <img src={image} alt={name} loading="lazy" />
-                ) : (
-                  <div className="image-placeholder">No Image</div>
-                )}
-                <h3>{name}</h3>
-                <p>{highlights}</p>
-              </motion.div>
-            ))}
+            {visibleDestinations.map((destination, index) => {
+              if (!destination) return null;
+              return (
+                <motion.div
+                  key={destination.name}
+                  className="destination-card"
+                  initial={{ opacity: 0, x: index === 1 ? 20 : -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {destination.image ? (
+                    <img src={destination.image} alt={destination.name} loading="lazy" />
+                  ) : (
+                    <div className="image-placeholder">No Image</div>
+                  )}
+                  <h3>{destination.name}</h3>
+                  <p>{destination.highlights}</p>
+                </motion.div>
+              );
+            })}
           </motion.div>
           <button className="carousel-arrow right" onClick={handleNext}>
             <ChevronRight />

@@ -33,7 +33,7 @@ body {
 }
 
 .home-hero {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://backend-1-cek6.onrender.com/images/banner.jpg'), url("image-not-found.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://backend-1-cek6.onrender.com/images/image-1741202805817.jpg'), url("image-not-found.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -341,6 +341,6 @@ body {
 }
 
 #product-header{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://backend-1-cek6.onrender.com/images/Product.jpg'), url("image-not-found.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://backend-1-cek6.onrender.com/images/image-1741203055671.jpg'), url("image-not-found.jpg");
   background-position: center;
 }

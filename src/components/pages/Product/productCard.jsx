@@ -7,11 +7,12 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
-      key={product.id}
+      key={product._id}
       className="group relative border rounded-lg overflow-hidden flex flex-col h-full bg-card"
+      style={{border:"2px solid black", boxShadow: "2px   initial"}}
     >
       {/* Product Link - covers the entire card */}
-      <Link href={`/products/${product.id}`} className="absolute inset-0 z-10">
+      <Link href={`/products/${product._id}`} className="absolute inset-0 z-10">
         <span className="sr-only">View {product.name}</span>
       </Link>
 
@@ -26,24 +27,24 @@ const ProductCard = ({ product }) => {
         />
 
         {/* Discount Badge */}
-        {product.discount_percentage && (
-          <div className="absolute top-2 left-2 z-20">
+        {product.discountPercentage && (
+          <div className="absolute top-2 left-2 z-20 rounded-full" style={{backgroundColor: "springgreen"}}>
             <Badge className="bg-destructive hover:bg-destructive">
-              {product.discount_percentage}% OFF
+              {product.discountPercentage}% OFF
             </Badge>
           </div>
         )}
 
         {/* Stock Badge */}
-        {product.stock_quantity <= 5 && product.stock_quantity > 0 && (
-          <div className="absolute top-2 right-2 z-20">
-            <Badge variant="outline" className="bg-background/80">
-              Only {product.stock_quantity} left
+        {product.stockQuantity <= 5 && product.stockQuantity > 0 && (
+          <div className="absolute top-2 right-2 z-20" >
+            <Badge variant="outline" className="bg-background/80" style={{backgroundColor:"tomato", border:"2px solid white"}}>
+              Only {product.stockQuantity} left
             </Badge>
           </div>
         )}
 
-        {product.stock_quantity === 0 && (
+        {product.stockQuantity === 0 && (
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center z-20">
             <Badge variant="outline" className="text-lg border-2">
               Out of Stock
@@ -56,9 +57,9 @@ const ProductCard = ({ product }) => {
       <div className="flex-1 p-4 flex flex-col">
         {/* Category & Brand */}
         <div className="flex justify-between items-start mb-1">
-          {product.category_name && (
-            <Badge variant="outline" className="text-xs font-normal">
-              {product.category_name}
+          {product.categoryName && (
+            <Badge variant="outline" className="text-xs font-normal" style={{backgroundColor: "azure"}}>
+              {product.categoryName}
             </Badge>
           )}
           {product.brand && (
@@ -101,8 +102,8 @@ const ProductCard = ({ product }) => {
         {/* Add to Cart Button */}
         <div className="mt-4 z-20 relative">
           <Button
-            className="w-full"
-            disabled={product.stock_quantity === 0}
+            className="w-full btn-primary rounded-full text-lg"
+            disabled={product.stockQuantity === 0}
             onClick={(e) => {
               e.preventDefault();
               // Add to cart logic here

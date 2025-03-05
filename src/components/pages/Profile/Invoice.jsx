@@ -64,7 +64,7 @@ const Invoice = () => {
           <div className="flex justify-between items-center border-b-2 border-black pb-4">
             <div className="flex items-center">
               <img
-                src="https://backend-1-cek6.onrender.com/images/logo.jpg"
+                src="https://backend-1-cek6.onrender.com/images/image-1741203755524.jpg"
                 alt="Company Logo"
                 className="h-24"
               />
