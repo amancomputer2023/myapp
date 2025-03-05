@@ -21,34 +21,10 @@ export default function Profile({ user }) {
   const [activeTab, setActiveTab] = useState("profile");
   const { toast } = useToast();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSave = (e) => {
-    e.preventDefault();
-    toast({
-      title: "Changes saved",
-      description: "Your profile has been updated successfully.",
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // In a real app, you would send this data to your backend
-    alert("Profile updated successfully!");
-  };
-
   const style = { backgroundColor: "aliceblue" };
 
   const navItemsUser = [
     { id: "profile", label: "Profile", icon: UserCircle },
-    // { id: "account", label: "Account Settings", icon: Settings },
-    // { id: "privacy", label: "Privacy", icon: Lock },
-    // { id: "notifications", label: "Notifications", icon: Bell },
-    // { id: "security", label: "Security", icon: Shield },
-    // { id: "billing", label: "Billing", icon: CreditCard },
   ];
 
   const navItemsAdmin = [
@@ -89,7 +65,6 @@ export default function Profile({ user }) {
           </Sheet>
         </header>
 
-        {/* Desktop Sidebar */}
         <aside className="flow left-0 hidden w-72 border-r bg-white lg:block">
           <SidebarContent
             user={user}
@@ -98,32 +73,18 @@ export default function Profile({ user }) {
             navItems={navItems}
           />
         </aside>
-
-        {/* Main Content */}
         <main className="flex-1 pb-24 ">
           <div className="container max-w-4xl py-6 lg:py-10">
             {activeTab === "profile" && (
               <ProfileContent
                 user={user}
-                handleChange={handleChange}
-                handleSubmit={handleSave}
               />
             )}
             {activeTab === "product" && (<Product />) }
             {activeTab === "services" && (<Services />) }
             {activeTab === "billBook" && (<Invoice />)}
-            {/* {activeTab === "privacy" && <PrivacyContent />}
-              {activeTab === "notifications" && <NotificationsContent />}
-              {activeTab === "security" && <SecurityContent />}
-              {activeTab === "billing" && <BillingContent />} */}
-              {/* {activeTab === "account" && (
-              <AccountContent user={user} handleChange={handleChange} />
-            )} */}
           </div>
         </main>
-
-        {/* Mobile Navigation */}
-        {/* <MobileNav activeTab={activeTab} setActiveTab={setActiveTab} /> */}
       </div>
     </div>
   );

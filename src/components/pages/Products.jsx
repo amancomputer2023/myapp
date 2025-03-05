@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Loader2, Search, Filter, Star, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import ProductCard from './Product/productCard';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -95,7 +96,7 @@ function Products() {
         </div>
       </motion.header>
       
-      <main className="w-full mx-auto py-6 px-12">
+      <main className="w-full mx-auto py-6 px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-semibold text-gray-800">
             Available Products
@@ -113,41 +114,8 @@ function Products() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product, index) => (
-            <motion.div
-              key={product.id}
-              className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                <div className="flex items-center mb-2">
-                  <MapPin size={16} className="text-gray-500 mr-1" />
-                  <span className="text-gray-600">{product.location}</span>
-                </div>
-                <div className="flex items-center mb-4">
-                  <Star size={16} className="text-yellow-400 mr-1" />
-                  <span className="text-gray-600">
-                    {product.rating} (120 reviews)
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-blue-600">
-                    ${product.price}
-                  </span>
-                  <button className="bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-700 transition-colors duration-300">
-                    Book Now
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+          {filteredProducts.map((product)=>(
+            <ProductCard product={product}/>
           ))}
         </div>
       </main>

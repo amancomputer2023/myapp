@@ -1,6 +1,6 @@
 import React from "react";
-import { Separator } from "../../ui/separator";
-import { Button } from "../../ui/button";
+import { Separator } from "../../../ui/separator";
+import { Button } from "../../../ui/button";
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../ui/card";
+} from "../../../ui/card";
 import { CreditCard } from "lucide-react";
 export default function BillingContent() {
   return (

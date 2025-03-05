@@ -40,7 +40,7 @@ function Header(props) {
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? (<X size={24} />) : (<Menu size={24} /> )}
         </button>
 
         <nav className={`nav-menu ${isMenuOpen ? "open" : ""}`}>
@@ -83,7 +83,7 @@ function Header(props) {
             </li>
           </ul>
         </nav>
-        { !props.user? <UserDropDown user={null} />:<UserDropDown user={props.user} />}
+        { !props.user ? (<UserDropDown user={null} />) : (<UserDropDown user={props.user} />) }
       </div>
     </header>
   );

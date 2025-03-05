@@ -37,7 +37,6 @@ export default function Footer() {
         alert("Subscription failed. Please try again.");
       }
     } catch (error) {
-      console.error("Error submitting email:", error);
       alert("An error occurred. Please try again later.");
     }
   };

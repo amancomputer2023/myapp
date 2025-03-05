@@ -47,7 +47,7 @@ function MainApp({ user, setUser }) {
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
           <Route path="/logout" element={<LogoutPage setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile user={user} />} />
+          <Route path="/profile" element={<Profile user={user}/>} />
         </Routes>
       </main>
       <Footer />

@@ -10,17 +10,18 @@ import {
   Settings,
 } from "lucide-react";
 import "../styles/About.css";
+import { Link } from "react-router-dom";
 
 const About = () => {
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-  };
-
   return (
     <div className="about-page">
-      <motion.section className="about-hero" {...fadeIn}>
+      {/* Hero Section */}
+      <motion.section
+        className="about-hero"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="about-container">
           <h1>About Us</h1>
           <p>Our Vision: Powering the Future of Technology</p>
@@ -29,36 +30,48 @@ const About = () => {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <ChevronDown size={32} />
+            <Link to="#about-container">
+              <ChevronDown size={32} />
+            </Link>
           </motion.div>
         </div>
       </motion.section>
 
-      <section className="about-container">
-        <motion.div className="about-content-block" {...fadeIn}>
+      {/* About Sections */}
+      <section className="about-container" id="about-container">
+        {/* Our Story */}
+        <motion.div
+          className="about-content-block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2>Our Story</h2>
           <p>
             Aman Computer Sells & Services started with a simple goal—providing
             reliable tech solutions. Over the years, we’ve grown into a trusted
-            name for computers, accessories, and CCTV sales & installation. With
-            a focus on quality service and customer satisfaction, we help
+            name for computers, accessories, and CCTV sales & installation.
+            With a focus on quality service and customer satisfaction, we help
             individuals and businesses stay secure and connected in the digital
             world.
           </p>
         </motion.div>
 
-        <motion.div className="about-content-block" {...fadeIn}>
+        {/* Our Mission */}
+        <motion.div
+          className="about-content-block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2>Our Mission</h2>
-          <p>
-            We are more than just a tech store. We are your trusted partner in
-            innovation. With a passion for cutting-edge technology,
-          </p>
+          <p>We are more than just a tech store. We are your trusted partner in innovation.</p>
           <div className="about-values-grid">
             {[
               {
                 title: "Top-Quality Computers & Accessories",
                 icon: Package,
-                description: "Handpicked for performance and reliability",
+                description: "Handpicked for performance and reliability.",
               },
               {
                 title: "Expert Repairs & Maintenance",
@@ -86,7 +99,13 @@ const About = () => {
           </div>
         </motion.div>
 
-        <motion.div className="about-values-block" {...fadeIn}>
+        {/* Why Choose Us */}
+        <motion.div
+          className="about-values-block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2>Why Choose Us?</h2>
           <div className="about-values-grid">
             {[
@@ -121,34 +140,33 @@ const About = () => {
           </div>
         </motion.div>
 
-        <motion.div className="about-team-block">
+        {/* Our Team */}
+        <motion.div
+          className="about-team-block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2>Our Team</h2>
           <p>Tech Experts Dedicated to Powering Your Digital World.</p>
-          <p>
-            Behind every successful tech solution is a team of passionate
-            professionals. At [New Business Name], we combine expertise,
-            innovation, and customer-focused service to ensure your devices
-            perform at their best. From cutting-edge sales to expert repairs,
-            our team is committed to providing top-notch technology solutions.
-          </p>
           <div className="about-team-grid">
             {[
               {
                 name: "Aman Kumar Jhariya",
                 role: "Founder & CEO",
-                image: "https://backend-1-cek6.onrender.com/images/About",
+                image: "https://backend-1-cek6.onrender.com/images/About.jpg",
                 disc: "Leading with a vision to simplify and enhance technology for everyone.",
               },
               {
                 name: "Michael Chen",
                 role: "Head of IT & Services",
-                image: "https://backend-1-cek6.onrender.com/images/About",
-                disc: " Ensuring seamless computer repairs, upgrades, and custom tech solutions.",
+                image: "https://backend-1-cek6.onrender.com/images/About.jpg",
+                disc: "Ensuring seamless computer repairs, upgrades, and custom tech solutions.",
               },
               {
-                name: "Null",
-                role: "Customer Experience Manager",
-                image: "https://backend-1-cek6.onrender.com/images/About",
+                name: "Sophia Patel",
+                role: "Customer Support Specialist",
+                image: "https://backend-1-cek6.onrender.com/images/About.jpg",
                 disc: "Providing dedicated support to keep your tech running smoothly.",
               },
             ].map((member, index) => (
@@ -160,7 +178,7 @@ const About = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <div className="team-member-image">
-                  <img src={member.image} alt={member.name} />
+                  <img src={member.image} alt={`${member.name} - ${member.role}`} />
                 </div>
                 <h3>{member.name}</h3>
                 <p>{member.role}</p>
@@ -170,7 +188,13 @@ const About = () => {
           </div>
         </motion.div>
 
-        <motion.div className="about-cta-block" {...fadeIn}>
+        {/* Call to Action */}
+        <motion.div
+          className="about-cta-block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2>Ready to Elevate Your Tech Experience?</h2>
           <p>
             At Aman Computer Sells & Services, we don’t just sell computers—we
@@ -179,9 +203,9 @@ const About = () => {
             expert repairs, or custom IT solutions, we’re here to ensure your
             technology works seamlessly.
           </p>
-          <a href="/contact" className="about-cta-button">
+          <Link to="/contact" className="about-cta-button">
             Join us in shaping the future—one device at a time!
-          </a>
+          </Link>
         </motion.div>
       </section>
     </div>

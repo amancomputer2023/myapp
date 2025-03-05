@@ -38,7 +38,6 @@ async function getServices() {
     }
     return data;
   } catch (error) {
-    alert("Error:", error);
     return null;
   }
 }
