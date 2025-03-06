@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Badge } from "../../ui/badge";
 import { Button } from "../../ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
-import { fetchProducts } from "./fetchproduct";
 import {
   Check,
   ChevronLeft,
@@ -13,13 +12,13 @@ import {
 } from "lucide-react";
 import PageNotFound from '../../PageNotFound';
 
-const ProductDetail = () => {
+const ProductDetail = ({products}) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const id = window.location.pathname.split("/")[2]
+  const id = window.location.pathname.split("/")[2];
 
   useEffect(() => {
     fetch();
@@ -27,8 +26,7 @@ const ProductDetail = () => {
   async function fetch() {
     setLoading(true);
     setError(null);
-    const res = await fetchProducts();
-    const data = res.find(item => item._id === id);
+    const data = products.find(item => item._id === id);
     if (!data) {
       setError("Failed to load product. Please try again later.");
     }

@@ -107,7 +107,7 @@ const ProductCard = ({ product }) => {
             className="w-full rounded-full btn-primary text-lg mr-10"
             disabled={product.stockQuantity === 0}
             onClick={(e) => {
-              navigate(`/product/${product._id}`)
+              navigate(`/products/${product._id}`)
             }}
           >
             <Info className="mr-2 h-4 w-4" />

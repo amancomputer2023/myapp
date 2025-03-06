@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Loader2, Search, Filter, Star, MapPin } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { motion } from "framer-motion";
 import ProductCard from "./Product/productCard";
 import { fetchProducts } from "./Product/fetchproduct";
+import { Route, Routes, useLocation } from "react-router-dom";
+import ProductDetail from "./Product/ProductDetail";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -10,6 +12,7 @@ function Products() {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("name-asc");
+  const location = useLocation();
 
   useEffect(() => {
     fetch();
@@ -55,6 +58,23 @@ function Products() {
       return 0;
     });
 
+  return (
+    <Routes location={location}>
+      <Route path="/" element={<AllProduct filteredProducts={filteredProducts} setSearchTerm={setSearchTerm} setSortBy={setSortBy}searchTerm={searchTerm} sortBy={sortBy}/>} />
+      <Route path="/*" element={<ProductDetail products={products}/>} />
+    </Routes>
+  );
+}
+
+function ProductsLoading() {
+  return (
+    <div className="flex justify-center items-center h-64">
+      <Loader2 className="h-8 w-8 animate-spin" />
+    </div>
+  );
+}
+
+function AllProduct({filteredProducts, setSearchTerm, setSortBy, searchTerm, sortBy}) {
   return (
     <div className="bg-gray-100 min-h-screen">
       <motion.header
@@ -109,14 +129,6 @@ function Products() {
           ))}
         </div>
       </main>
-    </div>
-  );
-}
-
-function ProductsLoading() {
-  return (
-    <div className="flex justify-center items-center h-64">
-      <Loader2 className="h-8 w-8 animate-spin" />
     </div>
   );
 }

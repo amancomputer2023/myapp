@@ -1,6 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { CreditCard, LogOut, Settings, UserIcon, User, LogIn, UserPlus } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
+import {
+  CreditCard,
+  LogOut,
+  Settings,
+  UserIcon,
+  User,
+  LogIn,
+  UserPlus,
+  UserCircle,
+  Wrench,
+  Package,
+  FileText,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import {
   DropdownMenu,
@@ -30,7 +42,8 @@ function UserDropDown(user) {
           className="w-56"
           align="end"
           forceMount
-          style={styleDMC} modal={false}
+          style={styleDMC}
+          modal={false}
         >
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
@@ -52,15 +65,34 @@ function UserDropDown(user) {
       </DropdownMenu>
     );
   }
-  const initials = user.firstName[0] +""+ user.lastName[0];
+  const navItemsUser = [
+    { to: "user/profile", label: "Profile", icon: UserCircle , className:"mr-2 h-4 w-4"},
+  ];
+
+  const navItemsAdmin = [
+    { to: "user/profile", label: "Profile", icon: UserCircle ,className:"mr-2 h-4 w-4 " },
+    { to: "user/services", label: "Services", icon: Wrench , className:"mr-2 h-4 w-4" },
+    { to: "user/product", label: "Product", icon: Package ,className:"mr-2 h-4 w-4"},
+    { to: "user/billBook", label: "BillBook", icon: FileText , className:"mr-2 h-4 w-4"}
+  ];
+  const navItems = user.role === "user" ? navItemsUser : navItemsAdmin;
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
       <DropdownMenuTrigger asChild>
-        <button variant="ghost" className="relative h-8 w-8 rounded-full">
+        <button
+          variant="ghost"
+          className="relative h-8 w-8 rounded-full"
+          aria-label="User menu"
+        >
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user.profilePictureUrl} alt={user.firstName + " " + user.lastName} />
-            <AvatarFallback>{initials}</AvatarFallback>
+            <AvatarImage
+              src={user?.profilePictureUrl}
+              alt={`${user?.firstName || ""} ${user?.lastName || ""}`}
+            />
+            <AvatarFallback>
+              {(user?.firstName?.[0] || "") + (user?.lastName?.[0] || "")}
+            </AvatarFallback>
           </Avatar>
         </button>
       </DropdownMenuTrigger>
@@ -72,39 +104,31 @@ function UserDropDown(user) {
       >
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{user.firstName + ' ' + user.lastName}</p>
+            <p className="text-sm font-medium leading-none">
+              {user?.firstName} {user?.lastName}
+            </p>
             <p className="text-xs leading-none text-muted-foreground">
-              {user.email}
+              {user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
-            <Link to="/profile">
-              <UserIcon className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to="/billing">
-              <CreditCard className="mr-2 h-4 w-4" />
-              <span>Billing</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to="/settings">
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-            </Link>
-          </DropdownMenuItem>
+          {navItems.map((item, index) => (
+            <DropdownMenuItem asChild key={index}>
+              <NavLink to={item.to}>
+                <item.icon className={item.className}/>
+                <span>{item.label}</span>
+              </NavLink>
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link to="/logout">
+          <NavLink to="/logout">
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
-          </Link>
+          </NavLink>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

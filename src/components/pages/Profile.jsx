@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Button } from "../ui/button";
 import { ChevronRight, FileText, Package, UserCircle, Wrench } from "lucide-react";
 import {
@@ -9,45 +8,37 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet.jsx";
-import { useToast } from "../ui/use-toast";
 import ProfileContent from "./Profile/ProfileContent";
 import SidebarContent from "./Profile/SidebarContent";
-import Services from './Profile/Services';
-import Product from './Profile/Product';
-import Invoice from './Profile/Invoice';
-
+import Services from "./Profile/Services";
+import Product from "./Profile/Product";
+import Invoice from "./Profile/Invoice";
+import { NavLink, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 export default function Profile({ user }) {
-  const [activeTab, setActiveTab] = useState("profile");
-  const { toast } = useToast();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const style = { backgroundColor: "aliceblue" };
 
-  const navItemsUser = [
-    { id: "profile", label: "Profile", icon: UserCircle },
-  ];
-
+  const navItemsUser = [{ id: "profile", label: "Profile", icon: UserCircle }];
   const navItemsAdmin = [
     { id: "profile", label: "Profile", icon: UserCircle },
     { id: "services", label: "Services", icon: Wrench },
     { id: "product", label: "Product", icon: Package },
-    { id: "billBook", label: "BillBook", icon: FileText}
+    { id: "billBook", label: "BillBook", icon: FileText },
   ];
   const navItems = user.role === "user" ? navItemsUser : navItemsAdmin;
 
   return (
-    <div className=" bg-muted/40">
+    <div className="bg-muted/40">
       <div className="flex">
         {/* Mobile Header */}
         <header className="fixed bg-background">
           <Sheet modal={false}>
             <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="shrink-0 lg:hidden"
-              >
-                <ChevronRight  className="w-8 h-8 text-gray-700 hover:text-blue-500 transition-all"/>
+              <Button variant="outline" size="icon" className="shrink-0 lg:hidden">
+                <ChevronRight className="w-8 h-8 text-gray-700 hover:text-blue-500 transition-all" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
@@ -55,34 +46,25 @@ export default function Profile({ user }) {
               <SheetHeader className="border-b p-6">
                 <SheetTitle>Menu</SheetTitle>
               </SheetHeader>
-              <SidebarContent
-                user={user}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                navItems={navItems}
-              />
+              <SidebarContent user={user} navItems={navItems} navigate={navigate} />
             </SheetContent>
           </Sheet>
         </header>
 
-        <aside className="flow left-0 hidden w-72 border-r bg-white lg:block">
-          <SidebarContent
-            user={user}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            navItems={navItems}
-          />
+        {/* Sidebar for Large Screens */}
+        <aside className="hidden w-72 border-r bg-white lg:block">
+          <SidebarContent user={user} navItems={navItems} navigate={navigate} />
         </aside>
-        <main className="flex-1 pb-24 ">
+
+        {/* Main Content */}
+        <main className="flex-1 pb-24">
           <div className="container max-w-4xl py-6 lg:py-10">
-            {activeTab === "profile" && (
-              <ProfileContent
-                user={user}
-              />
-            )}
-            {activeTab === "product" && (<Product />) }
-            {activeTab === "services" && (<Services />) }
-            {activeTab === "billBook" && (<Invoice />)}
+            <Routes location={location}>
+              <Route path="/profile" element={<ProfileContent user={user}/>} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/billBook" element={<Invoice />} />
+            </Routes>
           </div>
         </main>
       </div>

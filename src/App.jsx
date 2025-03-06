@@ -45,12 +45,11 @@ function MainApp({ user, setUser }) {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/*" element={<ProductDetail />} />
+          <Route path="/products/*" element={<Products />} />
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
           <Route path="/logout" element={<LogoutPage setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile user={user}/>} />
+          <Route path="/user/*" element={<Profile user={user}/>} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </main>
