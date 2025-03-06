@@ -4,12 +4,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
 
 export default function HomeFeaturedInformations() {
-  const [destinations, setDestinations] = useState([]);
+  const [productss, setproductss] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const fetchDestinations = async () => {
+  const fetchproductss = async () => {
     setLoading(true);
     setError("");
 
@@ -19,7 +19,7 @@ export default function HomeFeaturedInformations() {
       );
 
       if (status === 200 && Array.isArray(data) && data.length > 0) {
-        setDestinations(data);
+        setproductss(data);
       } else {
         setError("No featured information found.");
       }
@@ -31,22 +31,22 @@ export default function HomeFeaturedInformations() {
   };
 
   useEffect(() => {
-    fetchDestinations();
+    fetchproductss();
   }, []);
 
   const handleNext = useCallback(() => {
-    if (destinations.length > 0) {
-      setCurrentIndex((prev) => (prev + 1) % destinations.length);
+    if (productss.length > 0) {
+      setCurrentIndex((prev) => (prev + 1) % productss.length);
     }
-  }, [destinations.length]);
+  }, [productss.length]);
 
   const handlePrev = useCallback(() => {
-    if (destinations.length > 0) {
+    if (productss.length > 0) {
       setCurrentIndex(
-        (prev) => (prev - 1 + destinations.length) % destinations.length
+        (prev) => (prev - 1 + productss.length) % productss.length
       );
     }
-  }, [destinations.length]);
+  }, [productss.length]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -60,7 +60,7 @@ export default function HomeFeaturedInformations() {
 
   if (loading) {
     return (
-      <section className="home-featured-destinations">
+      <section className="home-featured-productss">
         <div className="container">
           <motion.div
             className="loading-placeholder"
@@ -77,7 +77,7 @@ export default function HomeFeaturedInformations() {
 
   if (error) {
     return (
-      <section className="home-featured-destinations">
+      <section className="home-featured-productss">
         <div className="container">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -87,7 +87,7 @@ export default function HomeFeaturedInformations() {
             Featured Information
           </motion.h2>
           <div className="error-message">{error}</div>
-          <button onClick={fetchDestinations} className="retry-button">
+          <button onClick={fetchproductss} className="retry-button">
             Retry
           </button>
         </div>
@@ -95,24 +95,26 @@ export default function HomeFeaturedInformations() {
     );
   }
 
-  if (destinations.length === 0) {
+  if (productss.length === 0) {
     return (
-      <section className="home-featured-destinations">
+      <section className="home-featured-productss">
         <div className="container">
-          <h2>No featured destinations available.</h2>
+          <h2>No featured productss available.</h2>
         </div>
       </section>
     );
   }
 
-  const visibleDestinations = [
-    destinations[(currentIndex - 1 + destinations.length) % destinations.length],
-    destinations[currentIndex],
-    destinations[(currentIndex + 1) % destinations.length],
+  const visibleproductss = [
+    productss[
+      (currentIndex - 1 + productss.length) % productss.length
+    ],
+    productss[currentIndex],
+    productss[(currentIndex + 1) % productss.length],
   ];
 
   return (
-    <section className="home-featured-destinations">
+    <section className="home-featured-productss">
       <div className="container">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -121,33 +123,41 @@ export default function HomeFeaturedInformations() {
         >
           Featured Information
         </motion.h2>
-        <div className="destination-carousel">
+        <div className="products-carousel">
           <button className="carousel-arrow left" onClick={handlePrev}>
             <ChevronLeft />
           </button>
           <motion.div
-            className="destination-grid"
+            className="products-grid"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {visibleDestinations.map((destination, index) => {
-              if (!destination) return null;
+            {visibleproductss.map((products, index) => {
+              if (!products) return null;
               return (
                 <motion.div
-                  key={destination.name}
-                  className="destination-card"
+                  key={products.name}
+                  className="products-card"
                   initial={{ opacity: 0, x: index === 1 ? 20 : -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4 }}
                 >
-                  {destination.image ? (
-                    <img src={destination.image} alt={destination.name} loading="lazy" />
+                  {products.image ? (
+                    <img
+                      src={products.image[0]}
+                      alt={products.name}
+                      loading="lazy"
+                    />
                   ) : (
                     <div className="image-placeholder">No Image</div>
                   )}
-                  <h3>{destination.name}</h3>
-                  <p>{destination.highlights}</p>
+                  <h3>{products.name}</h3>
+                  {Object.entries(products.highlights)?.map(
+                    ([key, value], index) => {
+                      return <p className="m-0 p-0">{value}</p>;
+                    }
+                  )}
                 </motion.div>
               );
             })}

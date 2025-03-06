@@ -66,7 +66,7 @@ const Invoice = () => {
               <img
                 src="https://backend-1-cek6.onrender.com/images/image-1741203755524.jpg"
                 alt="Company Logo"
-                className="h-24"
+                className="h-28 pl-5"
               />
             </div>
             <div>
@@ -85,14 +85,14 @@ const Invoice = () => {
             </div>
             <div className="text-left">
               <p className="text-lg font-bold mb-0">Invioce</p>
-              <p className=" mb-0 inline">Bill Number:</p>
+              <p className=" mb-0 inline">Bill Number : </p>
               <input
                 className="w-16"
                 type="text"
                 value={billNumber}
                 onChange={(e) => updateBillNumber(e)}
               />
-              <p className="">Date:{today.toLocaleDateString()}</p>
+              <p className="">Date : {today.toLocaleDateString("en-GB", {day: "numeric", month: "short", year: "numeric"})}</p>
             </div>
           </div>
 

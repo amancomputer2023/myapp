@@ -15,7 +15,9 @@ import LogoutPage from "./components/pages/LogoutPage";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/Profile";
 import Footer from "./components/Footer";
+import PageNotFound from './components/PageNotFound';
 import "./App.css";
+import ProductDetail from "./components/pages/Product/ProductDetail";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -44,10 +46,12 @@ function MainApp({ user, setUser }) {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/product/*" element={<ProductDetail />} />
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
           <Route path="/logout" element={<LogoutPage setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile user={user}/>} />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </main>
       <Footer />

@@ -109,7 +109,7 @@ body {
   box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
 }
 
-.home-featured-destinations,
+.home-featured-productss,
 .home-services {
   padding: var(--section-padding) 0;
   background-color: var(--color-background);
@@ -132,7 +132,7 @@ body {
   margin: 20px auto 0;
 }
 
-.destination-carousel {
+.products-carousel {
   position: relative;
   display: flex;
   align-items: center;
@@ -164,14 +164,14 @@ body {
   right: 10px;
 }
 
-.destination-grid {
+.products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
   width: 100%;
 }
 
-.destination-card {
+.products-card {
   background-color: var(--color-white);
   border-radius: 15px;
   overflow: hidden;
@@ -181,29 +181,29 @@ body {
   flex-direction: column;
 }
 
-.destination-card:hover {
+.products-card:hover {
   transform: translateY(-15px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-.destination-card img {
+.products-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   transition: transform var(--transition-main);
 }
 
-.destination-card:hover img {
+.products-card:hover img {
   transform: scale(1.1);
 }
 
-.destination-card h3 {
+.products-card h3 {
   font-size: 1.5rem;
   margin: 20px 20px 10px;
   color: var(--color-text);
 }
 
-.destination-card p {
+.products-card p {
   padding: 0 20px 20px;
   color: var(--color-text-light);
 }

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Loader2, Search, Filter, Star, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-import ProductCard from './Product/productCard';
+import ProductCard from "./Product/productCard";
+import { fetchProducts } from "./Product/fetchproduct";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -11,28 +12,18 @@ function Products() {
   const [sortBy, setSortBy] = useState("name-asc");
 
   useEffect(() => {
-    fetchProducts();
+    fetch();
   }, []);
-
-  const fetchProducts = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await fetch(
-        "https://backend-1-cek6.onrender.com/api/product/?api-key=Gajraj@0905"
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch products");
-      }
-      const data = await response.json();
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
+  async function fetch() {
+    setLoading(true);
+    setError(null);
+    const data = await fetchProducts();
+    if (!data) {
       setError("Failed to load products. Please try again later.");
-    } finally {
-      setLoading(false);
     }
-  };
+    setProducts(data);
+    setLoading(false);
+  }
 
   if (loading) {
     return <ProductsLoading />;
@@ -43,7 +34,7 @@ function Products() {
       <div className="text-center text-red-500">
         <p>{error}</p>
         <button
-          onClick={fetchProducts}
+          onClick={fetch}
           className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
         >
           Retry
@@ -51,7 +42,6 @@ function Products() {
       </div>
     );
   }
-
   // Filter & Sort Products
   const filteredProducts = products
     .filter((product) =>
@@ -95,7 +85,7 @@ function Products() {
           </div>
         </div>
       </motion.header>
-      
+
       <main className="w-full mx-auto py-6 px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-semibold text-gray-800">
@@ -114,8 +104,8 @@ function Products() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product)=>(
-            <ProductCard product={product}/>
+          {filteredProducts.map((product) => (
+            <ProductCard product={product} />
           ))}
         </div>
       </main>

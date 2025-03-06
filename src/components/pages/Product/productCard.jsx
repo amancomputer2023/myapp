@@ -1,9 +1,11 @@
-import { ShoppingCart } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Info, ShoppingCart } from "lucide-react";
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../ui/button';
 import { Badge } from '../../ui/badge';
 
 const ProductCard = ({ product }) => {
+  const discountedPrice = product.price - product.price * product.discountPercentage / 100;
+  const navigate = useNavigate()
 
   return (
     <div
@@ -19,7 +21,7 @@ const ProductCard = ({ product }) => {
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-muted" style={{height:"211px"}}>
         <img
-          src={product.image || "/placeholder.svg"}
+          src={product.image[0] || "/placeholder.svg"}
           alt={product.name}
           fill
           className="object-cover transition-transform group-hover:scale-105"
@@ -82,36 +84,34 @@ const ProductCard = ({ product }) => {
         {/* Price */}
         <div className="mt-auto">
           <div className="flex items-end gap-2">
-            {/* {discountedPrice ? (
+            {discountedPrice ? (
               <>
                 <span className="text-lg font-bold">
-                  {formatPrice(discountedPrice)}
+                {`\u20B9`} {discountedPrice}
                 </span>
                 <span className="text-sm text-muted-foreground line-through">
-                  {formatPrice(product.price)}
+                {`\u20B9`} {product.price}
                 </span>
               </>
             ) : (
               <span className="text-lg font-bold">
-                {formatPrice(product.price)}
+                {`\u20B9`} {product.price}
               </span>
-            )} */}
+            )}
           </div>
         </div>
 
         {/* Add to Cart Button */}
         <div className="mt-4 z-20 relative">
-          <Button
-            className="w-full btn-primary rounded-full text-lg"
+        <Button
+            className="w-full rounded-full btn-primary text-lg mr-10"
             disabled={product.stockQuantity === 0}
             onClick={(e) => {
-              e.preventDefault();
-              // Add to cart logic here
-              alert(`Added ${product.name} to cart`);
+              navigate(`/product/${product._id}`)
             }}
           >
-            <ShoppingCart className="mr-2 h-4 w-4" />
-            Add to Cart
+            <Info className="mr-2 h-4 w-4" />
+            Specification
           </Button>
         </div>
       </div>
