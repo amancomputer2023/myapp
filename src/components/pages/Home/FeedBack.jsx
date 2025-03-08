@@ -90,26 +90,39 @@ function FeedbackList() {
           </CardContent>
         </Card>
       ) : (
-        feedbackItems.map((item, index) => (
-          <Card key={index} className="text-left">
-            <CardHeader className="pb-2">
-              <div className="flex justify-between items-start">
-                <div>
-                  <CardTitle className="text-lg">{item.name}</CardTitle>
-                </div>
-                <Badge variant={getBadgeVariant(item.feedbackType)}>
-                  {formatFeedbackType(item.feedbackType)}
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p>{item.feedback}</p>
-              <p className="text-xs text-muted-foreground mt-2">
-                {new Date(item.createdAt).toLocaleString()}
-              </p>
-            </CardContent>
-          </Card>
-        ))
+        <>
+          <motion.div
+            className="contact-form-container text-left "
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <p className="text-xl text-bold text-black text-left">Recent {feedbackItems.length} feedbacks</p>
+            {feedbackItems.map((item, index) => (
+                <Card key={index} className="text-left mb-4">
+                  <CardHeader className="pb-2">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-lg">{item.name}</CardTitle>
+                      </div>
+                      <Badge
+                        variant={getBadgeVariant(item.feedbackType)}
+                        className="bg-blue-50"
+                      >
+                        {formatFeedbackType(item.feedbackType)}
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{item.feedback}</p>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {new Date(item.createdAt).toLocaleString()}
+                    </p>
+                  </CardContent>
+                </Card>
+            ))}
+          </motion.div>
+        </>
       )}
     </div>
   );
@@ -157,6 +170,7 @@ function FeedbackForm() {
       setFormData({ name: "", contact: "", feedbackType: "", feedback: "" });
 
       setTimeout(() => setSuccessfeedback(""), 5000);
+      window.location.reload();
     } catch (error) {
       console.error("Error:", error);
       setSuccessfeedback("Failed to send feedback. Please try again.");

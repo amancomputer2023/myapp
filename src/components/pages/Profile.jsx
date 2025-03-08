@@ -1,6 +1,14 @@
 import React from "react";
 import { Button } from "../ui/button";
-import { ChevronRight, FileText, Package, UserCircle, Wrench } from "lucide-react";
+import {
+  ChevronRight,
+  FileText,
+  Mail,
+  MessageCircle,
+  Package,
+  UserCircle,
+  Wrench,
+} from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -13,7 +21,16 @@ import SidebarContent from "./Profile/SidebarContent";
 import Services from "./Profile/Services";
 import Product from "./Profile/Product";
 import Invoice from "./Profile/Invoice";
-import { NavLink, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import PageNotFound from "../PageNotFound";
+import Feedbacks from "./Profile/feedbacks";
+import Message from "./Profile/message";
 
 export default function Profile({ user }) {
   const location = useLocation();
@@ -27,6 +44,8 @@ export default function Profile({ user }) {
     { id: "services", label: "Services", icon: Wrench },
     { id: "product", label: "Product", icon: Package },
     { id: "billBook", label: "BillBook", icon: FileText },
+    { id: "feedback", label: "FeedBack", icon: MessageCircle },
+    { id: "message", label: "Message", icon: Mail },
   ];
   const navItems = user.role === "user" ? navItemsUser : navItemsAdmin;
 
@@ -37,7 +56,11 @@ export default function Profile({ user }) {
         <header className="fixed bg-background">
           <Sheet modal={false}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="shrink-0 lg:hidden">
+              <Button
+                variant="outline"
+                size="icon"
+                className="shrink-0 lg:hidden"
+              >
                 <ChevronRight className="w-8 h-8 text-gray-700 hover:text-blue-500 transition-all" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
@@ -46,7 +69,11 @@ export default function Profile({ user }) {
               <SheetHeader className="border-b p-6">
                 <SheetTitle>Menu</SheetTitle>
               </SheetHeader>
-              <SidebarContent user={user} navItems={navItems} navigate={navigate} />
+              <SidebarContent
+                user={user}
+                navItems={navItems}
+                navigate={navigate}
+              />
             </SheetContent>
           </Sheet>
         </header>
@@ -60,10 +87,18 @@ export default function Profile({ user }) {
         <main className="flex-1 pb-24">
           <div className="container max-w-4xl py-6 lg:py-10">
             <Routes location={location}>
-              <Route path="/profile" element={<ProfileContent user={user}/>} />
-              <Route path="/product" element={<Product />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/billBook" element={<Invoice />} />
+            <Route path="/" element={<ProfileContent user={user} />} />
+              <Route path="/profile" element={<ProfileContent user={user} />} />
+              {user.role === "admin" && (
+                <>
+                  <Route path="/product" element={<Product />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/billBook" element={<Invoice />} />
+                  <Route path="/feedback" element={<Feedbacks />} />
+                  <Route path="/message" element={<Message />} />
+                </>
+              )}
+              <Route path="/*" element={<PageNotFound />}/>
             </Routes>
           </div>
         </main>
