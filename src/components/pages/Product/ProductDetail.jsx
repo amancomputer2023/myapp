@@ -10,9 +10,11 @@ import {
   LoaderCircleIcon,
   ShoppingCart,
 } from "lucide-react";
-import PageNotFound from '../../PageNotFound';
+import PageNotFound from "../../PageNotFound";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const ProductDetail = ({products}) => {
+const ProductDetail = ({ products }) => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,10 +25,11 @@ const ProductDetail = ({products}) => {
   useEffect(() => {
     fetch();
   }, []);
+
   async function fetch() {
     setLoading(true);
     setError(null);
-    const data = products.find(item => item._id === id);
+    const data = products.find((item) => item._id === id);
     if (!data) {
       setError("Failed to load product. Please try again later.");
     }
@@ -39,10 +42,24 @@ const ProductDetail = ({products}) => {
   }
 
   if (error) {
-    return (
-      <PageNotFound/>
-    );
+    return <PageNotFound />;
   }
+
+  const location = useLocation();
+  const addToCart = () => {
+    const savedUser = localStorage.getItem("user");
+    if (!savedUser) {
+      alert("Please login.")
+      navigate("/login", { state: { from: location } });
+      return;
+    }
+    
+    alert("added to cart");
+  };
+
+  const addToWishlist = () => {
+    alert("added to Wishlist");
+  };
 
   const createdate = new Date(product.createdAt);
   const updatedate = new Date(product.updatedAt);
@@ -230,14 +247,20 @@ const ProductDetail = ({products}) => {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 mt-2 ">
               <Button
-                className="flex-1 bg-black text-white"
+                className="flex-1 bg-black text-white hover:bg-gray-700"
                 size="lg"
                 disabled={product.stockQuantity === 0}
+                onClick={addToCart}
               >
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 Add to Cart
               </Button>
-              <Button variant="outline" size="lg">
+              <Button
+                variant="outline"
+                size="lg"
+                className="hover:bg-red-600 hover:text-white"
+                onClick={addToWishlist}
+              >
                 <Heart className="mr-2 h-5 w-5" />
                 Add to Wishlist
               </Button>

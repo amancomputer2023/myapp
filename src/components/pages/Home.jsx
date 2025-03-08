@@ -4,6 +4,7 @@ import HomeHero from "./Home/Hero";
 import HomeFeaturedInformations from "./Home/FeaturedInformations";
 import HomeServices from "./Home/Services";
 import HomeCta from "./Home/cta";
+import FeedBack from "./Home/FeedBack";
 
 const Home = () => {
 
@@ -12,7 +13,9 @@ const Home = () => {
       <HomeHero />
       <HomeFeaturedInformations />
       <HomeServices />
+      <FeedBack/>
       <HomeCta />
+      
     </main>
   );
 };

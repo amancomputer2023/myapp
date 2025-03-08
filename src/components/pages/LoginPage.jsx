@@ -11,19 +11,22 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Alert, AlertDescription } from "../ui/alert";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 
 async function signIn(email, password) {
   try {
-    const response = await fetch("https://backend-1-cek6.onrender.com/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "api-key": "Gajraj@0905",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await fetch(
+      "https://backend-1-cek6.onrender.com/api/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": "Gajraj@0905",
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    );
 
     const data = await response.json();
 
@@ -44,6 +47,9 @@ export default function LoginPage(props) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +63,7 @@ export default function LoginPage(props) {
         localStorage.setItem("token", data.token);
         props.setUser(data.user);
         alert("Login successful!");
-        window.location.href = "/";
+        navigate(from, { replace: true });
       }
     } catch (err) {
       setError(err.message || "Failed to sign in");

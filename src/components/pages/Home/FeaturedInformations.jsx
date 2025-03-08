@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function HomeFeaturedInformations() {
   const [productss, setproductss] = useState([]);
@@ -106,9 +107,7 @@ export default function HomeFeaturedInformations() {
   }
 
   const visibleproductss = [
-    productss[
-      (currentIndex - 1 + productss.length) % productss.length
-    ],
+    productss[(currentIndex - 1 + productss.length) % productss.length],
     productss[currentIndex],
     productss[(currentIndex + 1) % productss.length],
   ];
@@ -136,29 +135,33 @@ export default function HomeFeaturedInformations() {
             {visibleproductss.map((products, index) => {
               if (!products) return null;
               return (
-                <motion.div
-                  key={products.name}
-                  className="products-card"
-                  initial={{ opacity: 0, x: index === 1 ? 20 : -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {products.image ? (
-                    <img
-                      src={products.image[0]}
-                      alt={products.name}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="image-placeholder">No Image</div>
-                  )}
-                  <h3>{products.name}</h3>
-                  {Object.entries(products.highlights)?.map(
-                    ([key, value], index) => {
-                      return <p className="m-0 p-0">{value}</p>;
-                    }
-                  )}
-                </motion.div>
+                <>
+                  <Link to={`products/${products._id}`}>
+                    <motion.div
+                      key={products.name}
+                      className="products-card"
+                      initial={{ opacity: 0, x: index === 1 ? 20 : -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      {products.image ? (
+                        <img
+                          src={products.image[0]}
+                          alt={products.name}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="image-placeholder">No Image</div>
+                      )}
+                      <h3>{products.name}</h3>
+                      {Object.entries(products.highlights)?.map(
+                        ([key, value], index) => {
+                          return <p className="m-0 p-0">{value}</p>;
+                        }
+                      )}
+                    </motion.div>
+                  </Link>
+                </>
               );
             })}
           </motion.div>
