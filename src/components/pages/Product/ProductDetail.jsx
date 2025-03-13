@@ -14,6 +14,11 @@ import PageNotFound from "../../PageNotFound";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const ProductDetail = ({ products }) => {
+  const [formData, setFormData] = useState({
+    userId: "",
+    productId: "",
+    quantity: "",
+  });
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,10 +28,11 @@ const ProductDetail = ({ products }) => {
   const id = window.location.pathname.split("/")[2];
 
   useEffect(() => {
-    fetch();
+    fetchProduct();
   }, []);
+  
 
-  async function fetch() {
+  async function fetchProduct() {
     setLoading(true);
     setError(null);
     const data = products.find((item) => item._id === id);
@@ -46,18 +52,56 @@ const ProductDetail = ({ products }) => {
   }
 
   const location = useLocation();
-  const addToCart = () => {
-    const savedUser = localStorage.getItem("user");
+  const addToCart = async () => {
+    const savedUser = JSON.parse(localStorage.getItem("user"));
     if (!savedUser) {
-      alert("Please login.")
+      alert("Please login.");
       navigate("/login", { state: { from: location } });
       return;
     }
+
+    setFormData((prev) => ({
+      ...prev,
+      userId: savedUser._id,
+    }));
+    setFormData((prev) => ({
+      ...prev,
+      productId: product._id,
+    }));
+    setFormData((prev) => ({
+      ...prev,
+      quantity: quantity,
+    }));
     
+
+    console.log(formData);
+
+    const response = await fetch("https://backend-1-cek6.onrender.com/api/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": "Gajraj@0905",
+      },
+      body: JSON.stringify(formData),
+    });
+    console.log(response);
+
+    if (!response.ok) {
+      alert("Failed to add To cart");
+      return;
+    }
+
+
     alert("added to cart");
   };
 
   const addToWishlist = () => {
+    const savedUser = localStorage.getItem("user");
+    if (!savedUser) {
+      alert("Please login.");
+      navigate("/login", { state: { from: location } });
+      return;
+    }
     alert("added to Wishlist");
   };
 

@@ -4,6 +4,8 @@ import "../../styles/invoice.css";
 
 const Invoice = () => {
   const [billNumber, setBillNumber] = useState("");
+  const [invoiceDate, setInvoiceDate] = useState("");
+
   const [customer, setCustomer] = useState({
     name: "name",
     address: "address",
@@ -15,8 +17,6 @@ const Invoice = () => {
   ]);
 
   const [totalAmount, setTotalAmount] = useState(0);
-
-  const today = new Date();
 
   const addItem = () => {
     setItems([...items, { sno: items.length + 1, item: "", qty: 1, rate: 0, amount: 0 }]);
@@ -49,6 +49,9 @@ const Invoice = () => {
 
   const updateBillNumber = (e) => {
     setBillNumber(e.target.value);
+  };
+  const updateInvoiceDate = (e) => {
+    setInvoiceDate(e.target.value);
   };
 
   useEffect(() => {
@@ -91,8 +94,14 @@ const Invoice = () => {
                 type="text"
                 value={billNumber}
                 onChange={(e) => updateBillNumber(e)}
+              /> <br />
+              <p className="mb-0 inline">Date : </p>
+              <input
+                className="w-24"
+                type="text"
+                value={invoiceDate}
+                onChange={(e) => updateInvoiceDate(e)}
               />
-              <p className="">Date : {today.toLocaleDateString("en-GB", {day: "numeric", month: "short", year: "numeric"})}</p>
             </div>
           </div>
 

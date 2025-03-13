@@ -72,7 +72,7 @@ export default function Message() {
                 <CardContent>
                   <p>{item.message}</p>
                   <p className="text-xs text-muted-foreground mt-2">
-                    {new Date(item.createdAt).toLocaleString()}
+                    {new Date(item.createdAt).toLocaleString("en-gb")}
                   </p>
                 </CardContent>
               </Card>
